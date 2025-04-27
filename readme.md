@@ -14,7 +14,13 @@ Aplicación móvil nativa Android para la gestión de notas personales, desarrol
 - Se puede cambiar el tema visual de la aplicación (Claro, Oscuro o VIU).
 - La navegación entre pantallas se realiza usando Navigation Compose.
 
+### Vide de funcionamiento
+###
+###
+https://github.com/user-attachments/assets/f9907c9f-4c5b-488d-ba7e-8e0fe713d9ab
+
 ---
+
 
 ## Tecnologías y Herramientas Utilizadas 🛠
 
