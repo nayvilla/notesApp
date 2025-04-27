@@ -1,4 +1,4 @@
-package com.example.notesapp.ui.theme
+package com.example.notesapp.theme
 
 import android.app.Activity
 import android.os.Build
@@ -37,34 +37,49 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+private val ViuColorScheme = lightColorScheme(
+    primary = OrangeVIU,
+    secondary = BlackVIU,
+    tertiary = WhiteVIU,
+    background = WhiteVIU,
+    surface = WhiteVIU,
+    onPrimary = WhiteVIU,
+    onSecondary = WhiteVIU,
+    onTertiary = BlackVIU,
+    onBackground = BlackVIU,
+    onSurface = BlackVIU
+)
+
+// Enum para saber qué tema usar
+enum class AppThemeMode {
+    LIGHT, DARK, VIU
+}
+
 @Composable
 fun NotesAppTheme(
-        darkTheme: Boolean = isSystemInDarkTheme(),
-        // Dynamic color is available on Android 12+
-        dynamicColor: Boolean = true,
-        content: @Composable () -> Unit
+    appTheme: AppThemeMode = AppThemeMode.LIGHT,
+    dynamicColor: Boolean = true,
+    content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+    val colorScheme = when (appTheme) {
+        AppThemeMode.VIU -> ViuColorScheme
+        AppThemeMode.DARK -> DarkColorScheme
+        AppThemeMode.LIGHT -> LightColorScheme
     }
+
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars =
+                (appTheme != AppThemeMode.DARK)
         }
     }
 
     MaterialTheme(
-            colorScheme = colorScheme,
-            typography = Typography,
-            content = content
+        colorScheme = colorScheme,
+        typography = Typography,
+        content = content
     )
 }
