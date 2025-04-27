@@ -28,6 +28,7 @@ Aplicación móvil nativa Android para la gestión de notas personales, desarrol
 ---
 
 ## Estructura General 📁
+```bash
 com/example/notesapp/
 ├── data/
 │   ├── local/
