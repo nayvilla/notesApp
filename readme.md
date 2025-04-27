@@ -71,6 +71,7 @@ com/example/notesapp/
 │
 ├── MainActivity.kt         
 └── NotesApp.kt   
+```
 
 ## Instalación 📲
 
@@ -78,3 +79,4 @@ com/example/notesapp/
 
 ```bash
 git clone https://github.com/nayvilla/notesApp.git
+```
