@@ -143,11 +143,11 @@ fun AddEditScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     listOf(
-                        Color(0xFFFFFF00),
-                        Color(0xFF00FFFF),
-                        Color(0xFF00FF00),
-                        Color(0xFFFF0000),
-                        Color(0xFF0000FF)
+                        Color(0xFFFFFF00), // Amarillo
+                        Color(0xFF00FFFF), // Cian
+                        Color(0xFF00FF00), // Verde
+                        Color(0xFFFF0000), // Rojo
+                        Color(0xFF0000FF)  // Azul
                     ).forEach { colorOption ->
                         Surface(
                             color = colorOption,

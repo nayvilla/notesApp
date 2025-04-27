@@ -40,31 +40,48 @@ fun NoteCard(
         ) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
+                maxLines = 1
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
                 text = content,
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.bodyLarge,
+                maxLines = 7
             )
 
             Spacer(modifier = Modifier.height(12.dp))
 
             Row(
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Icon(
-                    imageVector = Icons.Default.CalendarToday,
-                    contentDescription = "Fecha",
-                    modifier = Modifier.size(16.dp),
-                    tint = MaterialTheme.colorScheme.onSurface
-                )
-                Text(
-                    text = date,
-                    style = MaterialTheme.typography.labelSmall
+                // Fecha con ícono
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.CalendarToday,
+                        contentDescription = "Fecha",
+                        modifier = Modifier.size(16.dp),
+                        tint = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = date,
+                        style = MaterialTheme.typography.labelSmall
+                    )
+                }
+
+                // Círculo de color de la nota
+                Box(
+                    modifier = Modifier
+                        .size(18.dp)
+                        .clip(MaterialTheme.shapes.small)
+                        .background(Color(color))
                 )
             }
         }

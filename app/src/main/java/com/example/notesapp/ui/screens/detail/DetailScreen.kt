@@ -2,18 +2,28 @@ package com.example.notesapp.ui.screens.detail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.notesapp.data.local.NoteDatabaseProvider
-import com.example.notesapp.ui.screens.detail.DetailViewModelFactory
+import com.example.notesapp.ui.components.SectionLabel
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.draw.clip
+import com.example.notesapp.ui.components.CustomButton
+import com.example.notesapp.ui.components.NoteSection
+import androidx.compose.ui.res.stringResource
+import com.example.notesapp.R
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -23,16 +33,15 @@ fun DetailScreen(
 ) {
     val context = LocalContext.current
     val repository = NoteDatabaseProvider.getRepository(context)
-    val viewModel: DetailViewModel = viewModel(
-        factory = DetailViewModelFactory(repository, noteId)
-    )
+    val viewModel: DetailViewModel = viewModel(factory = DetailViewModelFactory(repository, noteId))
 
     val note by viewModel.note.collectAsState()
+    val scrollState = rememberScrollState()
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Detalle de Nota", style = MaterialTheme.typography.titleLarge) },
+                title = { Text(stringResource(id = R.string.title_detail_screen), style = MaterialTheme.typography.titleLarge) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Atrás")
@@ -43,75 +52,115 @@ fun DetailScreen(
     ) { paddingValues ->
         Column(
             modifier = Modifier
-                .background(Color(note.color))
+                .background(MaterialTheme.colorScheme.background)
                 .padding(paddingValues)
-                .padding(24.dp)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Top
+                .fillMaxSize()
         ) {
-            Text(
-                text = "Título:",
-                style = MaterialTheme.typography.labelSmall
-            )
-            Text(
-                text = note.title,
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
+            Spacer(modifier = Modifier.height(16.dp))
 
-            Text(
-                text = "Contenido:",
-                style = MaterialTheme.typography.labelSmall
-            )
-            Text(
-                text = note.content,
-                style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-            Text(
-                text = "Color seleccionado:",
-                style = MaterialTheme.typography.labelSmall
-            )
+            Surface(
+                shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
+                color = MaterialTheme.colorScheme.background,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(horizontal = 24.dp, vertical = 16.dp)
+                        .verticalScroll(scrollState),
+                    verticalArrangement = Arrangement.spacedBy(24.dp)
+                ) {
+                    // Título
+                    NoteSection {
+                        SectionLabel(
+                            title = "Título",
+                            style = MaterialTheme.typography.bodyLarge,
+                            leadingIcon = Icons.Default.Title
+                        )
+                        Text(
+                            text = note.title,
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
+                        )
+                    }
 
-            Text(
-                text = "Código: ${note.color}",
-                style = MaterialTheme.typography.bodyLarge
-            )
+                    // Color Seleccionado
+                    NoteSection {
+                        SectionLabel(
+                            title = "Color Seleccionado",
+                            style = MaterialTheme.typography.bodyLarge,
+                            leadingIcon = Icons.Default.Palette
+                        )
+                        Box(
+                            modifier = Modifier
+                                .padding(top = 8.dp)
+                                .size(width = 120.dp, height = 50.dp)
+                                .clip(RoundedCornerShape(12.dp))
+                                .background(Color(note.color))
+                                .align(Alignment.CenterHorizontally)
+                        )
+                    }
 
-            Text(
-                text = "Nombre: ${getColorNameFromInt(note.color)}",
-                style = MaterialTheme.typography.bodyLarge
-            )
-            Text(
-                text = "Fecha de creación:",
-                style = MaterialTheme.typography.labelSmall
-            )
-            Text(
-                text = note.createdAt,
-                style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
+                    // Contenido
+                    NoteSection {
+                        SectionLabel(
+                            title = "Contenido",
+                            style = MaterialTheme.typography.bodyLarge,
+                            leadingIcon = Icons.Default.Description
+                        )
+                        Text(
+                            text = note.content,
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            maxLines = 6,
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
+                        )
+                    }
 
-            Text(
-                text = "Última actualización:",
-                style = MaterialTheme.typography.labelSmall
-            )
-            Text(
-                text = note.updatedAt,
-                style = MaterialTheme.typography.bodyLarge
-            )
+                    // Fecha de Creación
+                    NoteSection {
+                        SectionLabel(
+                            title = "Fecha de Creación",
+                            style = MaterialTheme.typography.bodyLarge,
+                            leadingIcon = Icons.Default.CalendarToday
+                        )
+                        Text(
+                            text = note.createdAt,
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
+                        )
+                    }
+
+                    // Última Actualización
+                    NoteSection {
+                        SectionLabel(
+                            title = "Última Actualización",
+                            style = MaterialTheme.typography.bodyLarge,
+                            leadingIcon = Icons.Default.Update
+                        )
+                        Text(
+                            text = note.updatedAt,
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
+                        )
+                    }
+
+                    CustomButton(
+                        text = "Editar Nota",
+                        leadingIcon = Icons.Default.Edit,
+                        onClick = {
+                            navController.navigate("add_edit/${note.id}") // Redireccionar a editar nota
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 24.dp)
+                    )
+                }
+            }
         }
     }
 }
 
-fun getColorNameFromInt(colorInt: Int): String {
-    return when (colorInt) {
-        Color.Yellow.value.toInt() -> "Amarillo"
-        Color.Cyan.value.toInt() -> "Cian"
-        Color.Green.value.toInt() -> "Verde"
-        Color.Red.value.toInt() -> "Rojo"
-        Color.Blue.value.toInt() -> "Azul"
-        Color.LightGray.value.toInt() -> "Gris Claro"
-        else -> "Personalizado"
-    }
-}
+
