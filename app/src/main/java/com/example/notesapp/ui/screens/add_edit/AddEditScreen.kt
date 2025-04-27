@@ -6,8 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Save
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -15,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.draw.clip
@@ -25,22 +25,26 @@ import com.example.notesapp.data.local.NoteDatabaseProvider
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddEditScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    noteId: Int? = null
 ) {
     val context = LocalContext.current
     val repository = NoteDatabaseProvider.getRepository(context)
-    val viewModel: AddEditViewModel = viewModel(
-        factory = AddEditViewModelFactory(repository)
-    )
+    val viewModel: AddEditViewModel = viewModel(factory = AddEditViewModelFactory(repository))
 
     val title by viewModel.title.collectAsState()
     val content by viewModel.content.collectAsState()
     val colorInt by viewModel.color.collectAsState()
     val updatedAt by viewModel.updatedAt.collectAsState()
-    //val isEditing by viewModel.isEditing.collectAsState() //
 
     val colorSelected = Color(colorInt)
     var showColorPicker by remember { mutableStateOf(false) }
+
+    LaunchedEffect(noteId) {
+        if (noteId != null && noteId != -1) {
+            viewModel.loadNoteById(noteId)
+        }
+    }
 
     Scaffold(
         containerColor = colorSelected,
@@ -53,9 +57,8 @@ fun AddEditScreen(
                         tonalElevation = 2.dp
                     ) {
                         Text(
-                            text = if (true) "Actualizado el: $updatedAt" else "Creado el: $updatedAt",
-                            modifier = Modifier
-                                .padding(horizontal = 12.dp, vertical = 6.dp),
+                            text = if (noteId != null && noteId != -1) "Actualizado el: $updatedAt" else "Nueva Nota",
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
                             style = MaterialTheme.typography.bodySmall,
                             textAlign = TextAlign.Center
                         )
@@ -63,18 +66,27 @@ fun AddEditScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Retroceder")
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Atrás")
                     }
                 },
                 actions = {
                     IconButton(onClick = {
-                        viewModel.saveNote()
+                        viewModel.saveNote(noteId)
                         navController.popBackStack()
                     }) {
                         Icon(Icons.Default.Save, contentDescription = "Guardar Nota")
                     }
                 }
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { showColorPicker = true },
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
+            ) {
+                Icon(Icons.Default.ColorLens, contentDescription = "Cambiar Color")
+            }
         }
     ) { paddingValues ->
         Column(
@@ -131,11 +143,11 @@ fun AddEditScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     listOf(
-                        Color(0xFFFFFF00), // Amarillo
-                        Color(0xFF00FFFF), // Cyan
-                        Color(0xFF00FF00), // Verde
-                        Color(0xFFFF0000), // Rojo
-                        Color(0xFF0000FF)  // Azul
+                        Color(0xFFFFFF00),
+                        Color(0xFF00FFFF),
+                        Color(0xFF00FF00),
+                        Color(0xFFFF0000),
+                        Color(0xFF0000FF)
                     ).forEach { colorOption ->
                         Surface(
                             color = colorOption,

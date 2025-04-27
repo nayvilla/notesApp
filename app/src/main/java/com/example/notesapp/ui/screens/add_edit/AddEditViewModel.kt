@@ -40,22 +40,49 @@ class AddEditViewModel(
         _color.value = newColor.toArgb()
     }
 
-    fun saveNote() {
+    fun loadNoteById(id: Int) {
+        viewModelScope.launch {
+            repository.getNotes().collect { notes ->
+                notes.find { it.id == id }?.let { note ->
+                    _title.value = note.title
+                    _content.value = note.content
+                    _color.value = note.color
+                    _updatedAt.value = note.updatedAt
+                }
+            }
+        }
+    }
+
+    fun saveNote(noteId: Int?) {
         val currentDate = SimpleDateFormat("dd-MMM-yyyy HH:mm", Locale.getDefault()).format(Date())
 
-        // Actualiza la fecha de actualización en el ViewModel
-        _updatedAt.value = currentDate
-
-        val note = Note(
-            title = _title.value,
-            content = _content.value,
-            createdAt = currentDate,
-            updatedAt = currentDate,
-            color = _color.value
-        )
+        val note = if (noteId == null || noteId == -1) {
+            // Crear nueva nota (sin id)
+            Note(
+                title = _title.value,
+                content = _content.value,
+                createdAt = currentDate,
+                updatedAt = currentDate,
+                color = _color.value
+            )
+        } else {
+            // Editar nota existente
+            Note(
+                id = noteId,
+                title = _title.value,
+                content = _content.value,
+                createdAt = updatedAt.value,
+                updatedAt = currentDate,
+                color = _color.value
+            )
+        }
 
         viewModelScope.launch {
-            repository.addNote(note)
+            if (noteId == null || noteId == -1) {
+                repository.addNote(note) // Insertar nuevo
+            } else {
+                repository.updateNote(note) // Actualizar existente
+            }
         }
     }
 }

@@ -20,8 +20,9 @@ fun AppNavigation(
         composable("home") {
             HomeScreen(navController)
         }
-        composable("add_edit") {
-            AddEditScreen(navController)
+        composable("add_edit/{noteId}") { backStackEntry ->
+            val noteId = backStackEntry.arguments?.getString("noteId")?.toIntOrNull() ?: -1
+            AddEditScreen(navController, noteId)
         }
         composable("detail/{noteId}") { backStackEntry ->
             val noteId = backStackEntry.arguments?.getString("noteId")?.toIntOrNull() ?: -1

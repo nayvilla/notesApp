@@ -7,8 +7,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,7 +39,11 @@ fun HomeScreen(
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = { navController.navigate("add_edit") }) {
+            FloatingActionButton(
+                onClick = { navController.navigate("add_edit/-1") }, // "-1" es para nueva nota
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
+            ) {
                 Icon(Icons.Default.Add, contentDescription = "Agregar Nota")
             }
         }
@@ -141,6 +144,7 @@ fun HomeScreen(
                 ) {
                     CustomButton(
                         text = "Ver Detalles",
+                        leadingIcon = Icons.Default.Search, // Icono de lupa por ejemplo
                         onClick = {
                             navController.navigate("detail/${selectedNote!!.id}")
                             showOptionsDialog = false
@@ -149,6 +153,7 @@ fun HomeScreen(
                     )
                     CustomButton(
                         text = "Editar Nota",
+                        leadingIcon = Icons.Default.Edit, // Icono de editar
                         onClick = {
                             navController.navigate("add_edit/${selectedNote!!.id}")
                             showOptionsDialog = false
@@ -157,6 +162,7 @@ fun HomeScreen(
                     )
                     CustomButton(
                         text = "Eliminar Nota",
+                        leadingIcon = Icons.Default.Delete, // Icono de eliminar
                         onClick = {
                             viewModel.deleteNoteById(selectedNote!!.id)
                             showOptionsDialog = false
