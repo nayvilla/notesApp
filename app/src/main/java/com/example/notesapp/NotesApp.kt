@@ -26,7 +26,7 @@ fun NotesApp() {
         Surface(
             color = MaterialTheme.colorScheme.background
         ) {
-            AppNavigation() // Llamamos a la navegación de pantallas
+            AppNavigation() // Llamada a la navegación de pantallas
         }
     }
 }

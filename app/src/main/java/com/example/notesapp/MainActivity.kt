@@ -1,4 +1,5 @@
 /**
+ * Autor: Naythan Villafuerte
  * MainActivity.kt
  *
  * Clase principal de la aplicación que extiende de ComponentActivity.
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            NotesApp() // Llamas a tu aplicación Compose
+            NotesApp() // Llamada a la aplicacion
         }
     }
 }
