@@ -1,3 +1,21 @@
+/**
+ * HomeScreen.kt
+ *
+ * Esta clase representa la pantalla principal de la aplicación de notas.
+ * Permite visualizar la lista de notas almacenadas, realizar búsquedas, filtrar por color,
+ * cambiar el tema de la aplicación (claro, oscuro, VIU), y navegar hacia la creación o edición de notas.
+ *
+ * Componentes destacados:
+ * - Scaffold: estructura principal de la pantalla.
+ * - OutlinedTextField: búsqueda de notas.
+ * - LazyVerticalStaggeredGrid: visualización de las notas en formato grid.
+ * - LazyRow: filtros por color de nota.
+ * - FloatingActionButton: creación de nuevas notas.
+ * - DropdownMenu: selector de tema de la aplicación.
+ *
+ * Se implementa el patrón MVVM utilizando un HomeViewModel para la gestión de estado.
+ */
+
 package com.example.notesapp.ui.screens.home
 
 import androidx.compose.foundation.background
@@ -26,7 +44,6 @@ import com.example.notesapp.ui.components.NoteCard
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

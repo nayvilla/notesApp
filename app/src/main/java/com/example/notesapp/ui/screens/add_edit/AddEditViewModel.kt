@@ -1,3 +1,18 @@
+/**
+ * AddEditViewModel.kt
+ *
+ * Esta clase gestiona la lógica de negocio y el estado de la pantalla de creación y edición de notas en la aplicación NotesApp.
+ * Permite actualizar el título, contenido y color de una nota, así como guardar nuevas notas o actualizar notas existentes.
+ *
+ * Funcionalidades principales:
+ * - Cargar los datos de una nota existente mediante su ID.
+ * - Actualizar dinámicamente los valores de título, contenido y color en la interfaz.
+ * - Generar y guardar una nueva nota o actualizar una nota previa en la base de datos local.
+ * - Controlar las fechas de creación y actualización de las notas.
+ *
+ * Sigue el patrón arquitectónico MVVM y utiliza corrutinas para el acceso asíncrono a los datos mediante un NoteRepository.
+ */
+
 package com.example.notesapp.ui.screens.add_edit
 
 import androidx.lifecycle.ViewModel

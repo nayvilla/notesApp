@@ -1,3 +1,16 @@
+/**
+ * NotesApp.kt
+ *
+ * Archivo principal de la aplicación que configura el tema general y carga el sistema de navegación entre pantallas.
+ *
+ * Funcionalidades:
+ * - Aplica el tema global utilizando NotesAppTheme.
+ * - Define una Surface que utiliza el color de fondo del tema actual.
+ * - Inicia la navegación entre pantallas mediante AppNavigation.
+ *
+ * Esta función actúa como punto de entrada para la estructura visual de la aplicación.
+ */
+
 package com.example.notesapp
 
 import androidx.compose.material3.MaterialTheme

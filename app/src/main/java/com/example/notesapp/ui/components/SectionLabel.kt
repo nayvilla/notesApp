@@ -1,3 +1,17 @@
+/**
+ * SectionLabel.kt
+ *
+ * Composable reutilizable que representa una etiqueta de sección con formato personalizado.
+ * Permite mostrar un texto con estilo configurable y, opcionalmente, un icono al inicio de la fila.
+ *
+ * Funcionalidades principales:
+ * - Muestra un texto estilizado para identificar una sección de la interfaz.
+ * - Permite incluir un icono opcional antes del texto.
+ * - Aplica negrita al título para mejorar la jerarquía visual.
+ *
+ * Este componente es utilizado en varias pantallas de la aplicación NotesApp para mantener la consistencia en la presentación de títulos de sección.
+ */
+
 package com.example.notesapp.ui.components
 
 import androidx.compose.foundation.layout.Row

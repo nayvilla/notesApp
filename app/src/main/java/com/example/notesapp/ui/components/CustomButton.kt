@@ -1,3 +1,18 @@
+/**
+ * CustomButton.kt
+ *
+ * Composable que define un botón personalizado utilizado de forma reutilizable en la aplicación NotesApp.
+ * Integra diseño visual consistente con el tema principal, iconografía opcional y configuraciones de elevación y estilo.
+ *
+ * Funcionalidades principales:
+ * - Permite mostrar un botón con texto centrado y un icono opcional al inicio.
+ * - Aplica esquinas redondeadas utilizando la configuración `shapes.large` del tema.
+ * - Configura colores de fondo y contenido basados en el esquema de colores de MaterialTheme.
+ * - Define elevaciones personalizadas para el estado normal y presionado.
+ *
+ * Este componente es utilizado en diferentes pantallas para acciones como ver detalles, editar o eliminar notas.
+ */
+
 package com.example.notesapp.ui.components
 
 import androidx.compose.foundation.layout.Arrangement

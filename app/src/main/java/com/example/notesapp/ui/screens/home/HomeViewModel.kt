@@ -1,3 +1,19 @@
+/**
+ * HomeViewModel.kt
+ *
+ * Esta clase implementa el ViewModel correspondiente a la pantalla principal (HomeScreen).
+ * Se encarga de gestionar la lista de notas y el estado del tema de la aplicación (claro, oscuro, VIU).
+ *
+ * Funcionalidades principales:
+ * - Obtener y actualizar en tiempo real la lista de notas desde el repositorio.
+ * - Eliminar una nota específica mediante su ID.
+ * - Gestionar el cambio dinámico de tema en la aplicación.
+ *
+ * Se implementa siguiendo el patrón arquitectónico MVVM, utilizando corrutinas y StateFlow
+ * para la actualización reactiva de la interfaz de usuario.
+ */
+
+
 package com.example.notesapp.ui.screens.home
 
 import androidx.lifecycle.ViewModel

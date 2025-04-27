@@ -1,20 +1,30 @@
-package com.example.notesapp.ui.screens.add_edit
+/**
+ * AddEditScreen.kt
+ *
+ * Esta clase define la pantalla de creación y edición de notas en la aplicación NotesApp.
+ * Permite al usuario ingresar o actualizar el título, contenido y color de una nota.
+ * Implementa una interfaz intuitiva utilizando Jetpack Compose, integrando la funcionalidad de guardado y selección de color.
+ *
+ * Funcionalidades principales:
+ * - Cargar una nota existente para su edición o iniciar una nueva nota.
+ * - Permitir la modificación del título y contenido de la nota mediante campos de texto.
+ * - Ofrecer un selector de color mediante un diálogo para personalizar la nota.
+ * - Guardar cambios en la base de datos local al confirmar la acción.
+ *
+ * Sigue el patrón arquitectónico MVVM, interactuando con el AddEditViewModel para gestionar el estado de los datos.
+ */
 
-import androidx.compose.foundation.background
+package com.example.notesapp.ui.screens.add_edit
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.draw.clip

@@ -1,3 +1,19 @@
+/**
+ * NoteDatabaseProvider.kt
+ *
+ * Objeto singleton que gestiona la instancia de la base de datos Room y proporciona acceso centralizado
+ * al repositorio de notas (NoteRepository) dentro de la aplicación NotesApp.
+ *
+ * Funcionalidades:
+ * - Asegura que exista una única instancia de NoteDatabase durante todo el ciclo de vida de la aplicación.
+ * - Permite obtener la instancia de NoteRepository para interactuar con la capa de datos.
+ * - Utiliza el patrón de diseño Singleton y aplica "fallbackToDestructiveMigration" para manejar migraciones destructivas automáticamente.
+ *
+ * Métodos:
+ * - getDatabase(context): Retorna una instancia única de NoteDatabase.
+ * - getRepository(context): Retorna una instancia única de NoteRepository basada en la base de datos creada.
+ */
+
 package com.example.notesapp.data.local
 
 import android.content.Context

@@ -1,3 +1,18 @@
+/**
+ * AppNavigation.kt
+ *
+ * Archivo responsable de definir y gestionar la navegación entre pantallas en la aplicación NotesApp.
+ * Utiliza el componente NavHost de Jetpack Compose para mapear las rutas y navegar entre Home, Add/Edit y Detail screens.
+ *
+ * Funcionalidades principales:
+ * - Configura el controlador de navegación (NavHostController) y define la ruta inicial como "home".
+ * - Instancia y utiliza el ThemeViewModel para aplicar dinámicamente el tema seleccionado en toda la aplicación.
+ * - Permite el paso de parámetros entre pantallas, como el noteId para editar o visualizar detalles de una nota específica.
+ * - Agrupa y estructura las pantallas principales dentro del sistema de navegación declarativo de Compose.
+ *
+ * Este archivo asegura que la navegación y la gestión del tema sean coherentes en toda la aplicación.
+ */
+
 package com.example.notesapp.navigation
 
 import androidx.compose.runtime.Composable

@@ -1,3 +1,19 @@
+/**
+ * NoteCard.kt
+ *
+ * Composable que representa una tarjeta visual para mostrar una nota individual en la aplicación NotesApp.
+ * Incluye título, contenido breve, fecha de creación o actualización, y un indicador visual del color asociado a la nota.
+ *
+ * Funcionalidades principales:
+ * - Muestra el título y el contenido de la nota de forma resumida.
+ * - Presenta la fecha acompañada de un icono de calendario.
+ * - Integra un pequeño círculo que indica el color personalizado de la nota.
+ * - Permite interacción táctil, ejecutando una acción al hacer clic (navegación o acciones relacionadas).
+ * - Aplica estilo con bordes redondeados, elevación sutil y fondo coloreado según el valor de la nota.
+ *
+ * Este componente es utilizado dentro de listas o grillas para la visualización principal de las notas.
+ */
+
 package com.example.notesapp.ui.components
 
 import androidx.compose.foundation.background

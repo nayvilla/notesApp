@@ -1,3 +1,17 @@
+/**
+ * NoteSection.kt
+ *
+ * Composable reutilizable que proporciona un contenedor estilizado para agrupar elementos relacionados en la interfaz de usuario.
+ * Envuelve su contenido dentro de un Surface con esquinas redondeadas, sombra sutil y separación vertical entre elementos.
+ *
+ * Funcionalidades principales:
+ * - Aplica un fondo basado en el esquema de colores actual del tema.
+ * - Agrega elevación tonal y sombra para resaltar visualmente la sección.
+ * - Proporciona un espacio interno (padding) y separación entre elementos internos.
+ *
+ * Este componente es utilizado en varias pantallas de la aplicación NotesApp para mantener la organización y estética de los bloques de contenido.
+ */
+
 package com.example.notesapp.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.shape.RoundedCornerShape
 
-// Composable reutilizable para envolver contenido con estilo de "sección"
 @Composable
 fun NoteSection(
     modifier: Modifier = Modifier,

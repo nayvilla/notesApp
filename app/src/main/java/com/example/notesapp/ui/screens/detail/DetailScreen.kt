@@ -1,3 +1,19 @@
+/**
+ * DetailScreen.kt
+ *
+ * Esta clase define la pantalla de detalles de una nota dentro de la aplicación.
+ * Permite visualizar de manera organizada la información completa de una nota previamente creada,
+ * mostrando campos como título, contenido, color, fecha de creación y fecha de actualización.
+ *
+ * Funcionalidades principales:
+ * - Visualizar los detalles de una nota seleccionada.
+ * - Proporcionar un botón para navegar a la edición de la nota.
+ * - Mantener el diseño adaptado a Material Design 3 usando Jetpack Compose.
+ * - Aplicar desplazamiento vertical para el contenido extenso.
+ *
+ * La pantalla forma parte de la arquitectura MVVM utilizando un ViewModel dedicado para la obtención de datos.
+ */
+
 package com.example.notesapp.ui.screens.detail
 
 import androidx.compose.foundation.background
